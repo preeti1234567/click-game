@@ -3,46 +3,75 @@ import React, { Component } from "react";
 import Card from "./components/Card";
 import Wrapper from "./components/Wrapper";
 import Score from "./components/Score";
-import pups from "./cards.json";
+import API from "./utils/API"
 import "./App.css";
-//import API from "../utils/API";
+
+
+
 
 class App extends Component {
+  
   // Setting this.state.pups to the cards json array
   state = {
-    pups,
-    clickedPuppyIds: [],
+    pups:[],
+    puppyIds: [],
     score: 0,
-    goal: 8,
-    status: ""
+    topScore: 0,
   };
 
-//   //shuffle the pup cards in the browser when clicked
-//   shuffleScoreCard = id => {
-//     let clickedPuppyIds = this.state.clickedPuppyIds;
+  componentDidMount() {
+    API.getPuppyList()
+      .then(res => { this.setState({ pups: res.data.data })})
+      .catch(err => console.log(err));
+  }
 
-//     if(clickedPuppyIds.includes(id)){
-//       this.setState({ clickedPuppyIds: [], score: 0, status:  "Game Over! You lost. Click to play again!" });
-//       return;
-//     }else{
-//       clickedPuppyIds.push(id)
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
-//       if(clickedPuppyIds.length === 8){
-//         this.setState({score: 8, status: "You Won! Great Job, Smartie! Click to play again!", clickedPuppyIds: []});
-//         console.log('You Win');
-//         return;
-//       }
+  newScore = this.state.score;
+  clickedPuppyIds = this.state.puppyIds;
+  topScore = this.state.topScore;
 
-//       this.setState({ pups, clickedPuppyIds, score: clickedPuppyIds.length, status: " " });
-
-//       for (let i = pups.length - 1; i > 0; i--) {
-//         let j = Math.floor(Math.random() * (i + 1));
-//         [pups[i], pups[j]] = [pups[j], pups[i]];
-//       }
-//     }
-//   }
-
-//   // Map over this.state.cards and render a Card component for each card object
+  shuffleScoreCard = (id) => {
+    this.randomPups = this.shuffle(this.state.pups);
+    this.clickedPuppyIds = this.state.puppyIds;
+    if(this.clickedPuppyIds.some(pupId => pupId === id))
+    {
+      this.newScore = 0;
+      this.clickedPuppyIds=[];
+    }
+    else
+    {
+      this.newScore++;
+      this.clickedPuppyIds.push(id);
+      if(this.newScore > this.topScore)
+        this.topScore = this.newScore;
+    }
+    this.setState(state => (
+      {
+        pups:this.randomPups,
+        puppyIds:this.clickedPuppyIds,
+        score: this.newScore,
+        topScore: this.topScore,
+      }));
+  }
+  
   render() {
     return (
       <div className="App">
@@ -53,17 +82,16 @@ class App extends Component {
           </p>
         </header>
         
-        <Score total={this.state.score}
-               goal={8}
-               status={this.state.status}
-               />
+        <Score score={this.state.score}
+           topScore={this.state.topScore}
+        />
         <Wrapper>
           {this.state.pups.map(puppy => (
             <Card
               shuffleScoreCard={this.shuffleScoreCard}
               id={puppy.id}
               key={puppy.id}
-              image={puppy.image}
+              image={puppy.url}
             />
           ))}
         </Wrapper>

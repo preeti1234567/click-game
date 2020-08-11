@@ -1,7 +1,27 @@
-.shuffleScore{
+.container{
 
-    height: 20%;
-    width: 20%;
+   
+        background: #fff;
+        border-radius: 2px;
+        height: 100%;
+        margin: 1rem;
+        margin-top: 10px;
+        position: relative;
+        display:inline-block;
+        width: 20%;
+        }
+      
+      .shuffleScore{
+          display:flex;
+          justify-content: center;
+          width:300px
+
+      }
+      
+      .hover img:hover  {
+          margin-left: -30px;
+      
+     
 
 }
 

@@ -1,3 +1,4 @@
+
 [{
     "id": 1,
     "image": "https://images.pexels.com/photos/162321/dog-puppy-yorkshire-terrier-yorkshire-terrier-puppy-162321.jpeg?h=350&auto=compress&cs=tinysrgb"
@@ -14,7 +15,7 @@
   {
     "id": 4,
     "image": "https://images.pexels.com/photos/133196/pexels-photo-133196.jpeg?h=350&auto=compress&cs=tinysrgb"
-  },
+  }, 
   {
     "id": 5,
     "image": "https://images.pexels.com/photos/169524/pexels-photo-169524.jpeg?h=350&auto=compress&cs=tinysrgb"
@@ -33,5 +34,6 @@
     "id": 8,
     "image": "https://images.pexels.com/photos/434046/pexels-photo-434046.jpeg?h=350&auto=compress&cs=tinysrgb"
 
-  }
+  }  
 ]
+
