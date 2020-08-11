@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Card from "./components/Card";
 import Wrapper from "./components/Wrapper";
 import Score from "./components/Score";
-import API from "./utils/API"
+import pups from "./cards.json";
 import "./App.css";
 
 
@@ -13,17 +13,11 @@ class App extends Component {
   
   // Setting this.state.pups to the cards json array
   state = {
-    pups:[],
+    pups,
     puppyIds: [],
     score: 0,
     topScore: 0,
   };
-
-  componentDidMount() {
-    API.getPuppyList()
-      .then(res => { this.setState({ pups: res.data.data })})
-      .catch(err => console.log(err));
-  }
 
   shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -75,9 +69,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <header  style={{height:"100%"}}className="App-header">
           <h1 className="App-title">The Clickster</h1>
-          <p className="App-intro">
+          <p style={{fontSize:"30px"}} className="App-intro text-center">
             Try not to click the same image twice!
           </p>
         </header>
@@ -91,7 +85,7 @@ class App extends Component {
               shuffleScoreCard={this.shuffleScoreCard}
               id={puppy.id}
               key={puppy.id}
-              image={puppy.url}
+              image={puppy.image}
             />
           ))}
         </Wrapper>
@@ -99,7 +93,7 @@ class App extends Component {
     </div>
     );
   }
-//}
+
 }
 
 export default App;
