@@ -1,5 +1,5 @@
 {
-  "homepage":"http://preeti1234567.github.io/click-game",
+  "homepage": "http://preeti1234567.github.io/click-game",
   "name": "click-game",
   "version": "0.1.0",
   "private": true,
@@ -10,7 +10,7 @@
     "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.2"
   },
   "scripts": {
     "predeploy": "npm run build",
