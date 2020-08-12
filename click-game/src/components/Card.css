@@ -1,0 +1,19 @@
+.container{
+
+   
+        background: #fff;
+        border-radius: 2px;
+        height: 100%;
+        margin: 1rem;
+        margin-top: 10px;
+        position: relative;
+        display:inline-block;
+        width: 20%;
+        }
+      
+      .shuffleScore{
+         width:300px
+
+      }
+      
+      
